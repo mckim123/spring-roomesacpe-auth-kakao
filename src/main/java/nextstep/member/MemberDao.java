@@ -1,6 +1,7 @@
 package nextstep.member;
 
 import java.sql.PreparedStatement;
+import java.util.Optional;
 import javax.sql.DataSource;
 import nextstep.auth.Role;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,18 +45,8 @@ public class MemberDao {
         return keyHolder.getKey().longValue();
     }
 
-    public Member findById(Long id) {
-        String sql = "SELECT id, username, password, role, name, phone from member where id = ?;";
-        return jdbcTemplate.queryForObject(sql, rowMapper, id);
-    }
-
-    public Member findByUsername(String username) {
+    public Optional<Member> findByUsername(String username) {
         String sql = "SELECT id, username, password, role, name, phone from member where username = ?;";
-        return jdbcTemplate.queryForObject(sql, rowMapper, username);
-    }
-
-    public boolean countByUsernameAndPassword(String username, String password) {
-        String sql = "SELECT count(*) from member where username = ? and password = ?";
-        return jdbcTemplate.queryForObject(sql, Integer.class, username, password) != 0;
+        return jdbcTemplate.query(sql, rowMapper, username).stream().findAny();
     }
 }

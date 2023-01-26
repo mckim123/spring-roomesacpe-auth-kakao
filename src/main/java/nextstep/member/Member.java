@@ -15,8 +15,8 @@ public class Member {
     private String name;
     private String phone;
 
-    public boolean checkWrongPassword(String password) {
-        return !this.password.equals(password);
+    public boolean doesPasswordMatch(String password) {
+        return this.password.equals(password);
     }
 
     public boolean isAdmin() {
