@@ -20,6 +20,6 @@ public class Member {
     }
 
     public boolean isAdmin() {
-        return role.equals(Role.ADMIN);
+        return Role.ADMIN.equals(role);
     }
 }
