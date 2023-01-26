@@ -50,7 +50,6 @@ public class ReservationService {
         if (theme == null) {
             throw new NotExistEntityException();
         }
-
         return reservationDao.findAllByThemeIdAndDate(themeId, date);
     }
 

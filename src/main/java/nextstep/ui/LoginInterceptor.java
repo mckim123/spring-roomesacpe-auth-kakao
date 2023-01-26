@@ -1,5 +1,6 @@
 package nextstep.ui;
 
+import io.jsonwebtoken.JwtException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginInterceptor implements HandlerInterceptor {
 
     private final JwtTokenProvider tokenProvider;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = AuthorizationExtractor.extract(request);
@@ -21,7 +23,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return false;
         }
-        tokenProvider.validate(token);
+        try {
+            tokenProvider.validate(token);
+        } catch (IllegalArgumentException e) {
+            throw new JwtException(e.getMessage());
+        }
         return true;
     }
 }

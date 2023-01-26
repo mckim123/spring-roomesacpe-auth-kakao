@@ -1,5 +1,14 @@
 package nextstep.member;
 
+import static nextstep.Constant.AUTHORIZATION;
+import static nextstep.Constant.BEARER_TYPE;
+import static nextstep.Constant.NAME;
+import static nextstep.Constant.PASSWORD;
+import static nextstep.Constant.PHONE;
+import static nextstep.Constant.USERNAME;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.core.StringStartsWith.startsWith;
+
 import io.restassured.RestAssured;
 import nextstep.auth.TokenRequest;
 import nextstep.auth.TokenResponse;
@@ -9,15 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
-
-import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.assertj.core.api.Assertions.assertThat;
-import static nextstep.Constant.USERNAME;
-import static nextstep.Constant.PASSWORD;
-import static nextstep.Constant.NAME;
-import static nextstep.Constant.PHONE;
-import static nextstep.Constant.AUTHORIZATION;
-import static nextstep.Constant.BEARER_TYPE;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

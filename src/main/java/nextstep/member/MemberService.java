@@ -2,6 +2,7 @@ package nextstep.member;
 
 import lombok.RequiredArgsConstructor;
 import nextstep.auth.JwtTokenProvider;
+import nextstep.exception.LoginFailException;
 import nextstep.exception.NotLoggedInException;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,8 @@ public class MemberService {
         return memberDao.save(memberRequest.toEntity());
     }
 
-    public Member findById(Long id) {
-        return memberDao.findById(id);
-    }
-
     public Member findByUsername(String username) {
-        return memberDao.findByUsername(username);
+        return memberDao.findByUsername(username).orElseThrow(LoginFailException::new);
     }
 
     public Member findByToken(String token) {

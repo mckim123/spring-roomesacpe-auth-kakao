@@ -1,17 +1,16 @@
 package nextstep.auth;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
+import javax.servlet.http.HttpServletRequest;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthorizationExtractor {
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER_TYPE = "Bearer";
     private static final String ACCESS_TOKEN_TYPE = AuthorizationExtractor.class.getSimpleName() + ".ACCESS_TOKEN_TYPE";
-
-    private AuthorizationExtractor() {
-        throw new AssertionError();
-    }
 
     public static String extract(HttpServletRequest request) {
         Enumeration<String> headers = request.getHeaders(AUTHORIZATION);
